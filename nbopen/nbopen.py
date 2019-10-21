@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
+import sys
 import argparse
 import os.path
 import webbrowser
+import psutil
 
 from notebook import notebookapp
 from notebook.utils import url_path_join, url_escape
@@ -10,8 +12,16 @@ import nbformat
 from traitlets.config import Config
 
 def find_best_server(filename):
-    servers = [si for si in notebookapp.list_running_servers()
-               if filename.startswith(si['notebook_dir'])]
+    if sys.platform == 'win32':
+    #    print('Getting list of pids...', end='')
+    #    sys.stdout.flush()
+        pids = {p.pid for p in psutil.process_iter()}
+    #    print('ok')
+        servers = [si for si in notebookapp.list_running_servers()
+                if filename.startswith(si['notebook_dir']) and si['pid'] in pids]
+    else:
+        servers = [si for si in notebookapp.list_running_servers()
+                if filename.startswith(si['notebook_dir'])]
     try:
         return max(servers, key=lambda si: len(si['notebook_dir']))
     except ValueError:
