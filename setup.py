@@ -52,7 +52,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="winbopen",
-    version="0.7",
+    version="0.7.1",
     author='Lev Maximov',
     author_email='lev.maximov@gmail.com',
     url='https://github.com/axil/winbopen',
