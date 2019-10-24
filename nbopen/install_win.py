@@ -16,8 +16,8 @@ with winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\Classes\.ipynb") as k:
         winreg.SetValueEx(openwith, "Jupyter.nbopen", 0, winreg.REG_NONE, b'')
 
 executable = sys.executable
-if executable.endswith("python.exe"):
-    executable = executable[:-10] + 'pythonw.exe'
+#if executable.endswith("python.exe"):
+#    executable = executable[:-10] + 'pythonw.exe'
 launch_cmd = '"{}" -m nbopen "%1"'.format(executable)
 
 with winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\Classes\Jupyter.nbopen") as k:

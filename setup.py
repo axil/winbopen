@@ -20,8 +20,8 @@ def install_win():
             winreg.SetValueEx(openwith, "Jupyter.nbopen", 0, winreg.REG_NONE, b'')
 
     executable = sys.executable
-    if executable.endswith("python.exe"):
-        executable = executable[:-10] + 'pythonw.exe'
+#    if executable.endswith("python.exe"):
+#        executable = executable[:-10] + 'pythonw.exe'
     launch_cmd = '"{}" -m nbopen "%1"'.format(executable)
 
     with winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\Classes\Jupyter.nbopen") as k:
@@ -52,7 +52,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="winbopen",
-    version="0.7.1",
+    version="0.7.2",
     author='Lev Maximov',
     author_email='lev.maximov@gmail.com',
     url='https://github.com/axil/winbopen',
